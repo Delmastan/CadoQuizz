@@ -1,0 +1,39 @@
+.ranking-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #378b29;
+  width: 70%;
+  margin: 0 auto;
+  border-radius: 16px;
+  padding: 8px;
+  gap: 8px;
+  margin-block: 16px;
+  div {
+    display: flex;
+    justify-content: space-around;
+    background-color: #74d680;
+    border-radius: 8px;
+    p {
+      font-family: "Text-font";
+      font-size: 2rem;
+    }
+  }
+  .ranking-first {
+    color: yellow;
+    p {
+      font-size: 3.5rem;
+    }
+  }
+  .ranking-second {
+    color: grey;
+    p {
+      font-size: 3rem;
+    }
+  }
+  .ranking-third {
+    color: brown;
+    p {
+      font-size: 2.5rem;
+    }
+  }
+}

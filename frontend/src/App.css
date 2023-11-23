@@ -168,3 +168,7 @@ button {
   font-family: "Title-font";
   src: url("./assets/fonts/SnowyDahlia.ttf");
 }
+
+.app-container {
+  min-height: 100vh;
+}

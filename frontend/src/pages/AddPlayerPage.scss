@@ -1,14 +1,56 @@
 .addplayerpage-container {
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/imagehomepage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  width: 80%;
+  align-items: center;
   gap: 8px;
-  margin-block: 16px;
+  padding-block: 16px;
+  min-height: calc(100vh - 100px);
   div {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
+    background: #74d680;
+    border-radius: 8px;
+    padding: 4px;
+
+    label {
+      font-family: "Text-font";
+      font-size: 2rem;
+    }
+
+    input {
+      background: #378b29;
+      color: white;
+      border: 1px solid black;
+      border-radius: 4px;
+    }
+
+    input::placeholder {
+      color: white;
+    }
+  }
+  button {
+    background: #74d680;
+    padding: 8px;
+    font-family: "Text-font";
+    font-size: 3rem;
+    border: 3px solid #378b29;
+    border-radius: 16px;
+    box-shadow: 2px 2px 2px;
+  }
+
+  button:hover {
+    box-shadow: 6px 6px 2px;
+  }
+
+  button:active {
+    box-shadow: 0px 0px 0px;
   }
 }

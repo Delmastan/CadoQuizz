@@ -6,6 +6,7 @@ import ShowQuestion from "./components/ShowQuestion/ShowQuestion";
 import AddPlayerPage from "./pages/AddPlayerPage";
 import HomePage from "./components/HomePage/HomePage";
 import Roulette from "./components/Roulette/Roulette";
+import ActualRanking from "./pages/ActualRanking";
 import Roue from "./components/Roue/Roue";
 
 const FecthData = async (limit, category, difficulty) => {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
           return FecthData(6, "tv_cinema", "facile");
         },
       },
-      { path: "/classement", element: <>Classement</> },
+      { path: "/classement", element: <ActualRanking /> },
       { path: "/resultat", element: <>Resultat</> },
     ],
   },
