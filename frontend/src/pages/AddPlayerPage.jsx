@@ -30,7 +30,7 @@ function AddPlayerPage() {
       (player) => player.name.trim() !== ""
     );
     setPlayers(filteredPlayers);
-    navigate(`/roulette`);
+    navigate(`/roue`);
   };
 
   useEffect(() => {

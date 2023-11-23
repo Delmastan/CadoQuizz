@@ -8,6 +8,7 @@ import AddPlayerPage from "./pages/AddPlayerPage";
 import HomePage from "./components/HomePage/HomePage";
 import Roulette from "./components/Roulette/Roulette";
 import ActualRanking from "./pages/ActualRanking";
+import Roue from "./components/Roue/Roue";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/joueur", element: <AddPlayerPage /> },
       { path: "/roulette", element: <Roulette /> },
+      { path: "/roue", element: <Roue /> },
       {
         path: "/demarrer",
         element: <ShowQuestion />,
