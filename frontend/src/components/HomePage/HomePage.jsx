@@ -1,27 +1,24 @@
 import React, { useState } from "react";
 import "./HomePage.scss";
+import { useNavigate } from "react-router-dom";
 import { useOptions } from "../../contexts/PlayerContext";
 
 function HomePage() {
-  const { difficulty, limit, setDifficulty, setLimit } = useOptions();
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const { setDifficulty, setLimit } = useOptions();
+  const [selectedDifficulty, setSelectedDifficulty] = useState("facile");
+  const [numberPlayer, setNumberPlayer] = useState();
+  const navigate = useNavigate();
 
   // eslint-disable-next-line no-shadow
-  const handleDifficultySelect = (difficulty) => {
-    setSelectedDifficulty(difficulty);
-    setDifficulty(difficulty);
+  const handleDifficultySelect = (choice) => {
+    setSelectedDifficulty(choice);
+    setDifficulty(selectedDifficulty);
   };
-  // eslint-disable-next-line no-restricted-syntax
-  console.log(difficulty);
-  const handleLimitChange = (event) => {
-    let newLimit = event.target.value;
 
-    newLimit = Math.min(newLimit, 20);
-
-    setLimit(newLimit);
+  const handleValidationClick = () => {
+    setLimit(numberPlayer);
+    navigate(`/joueur`);
   };
-  // eslint-disable-next-line no-restricted-syntax
-  console.log(limit);
 
   return (
     <div className="home-page">
@@ -36,8 +33,10 @@ function HomePage() {
           type="text"
           id="input-field-home-page"
           name="input"
-          value={limit}
-          onChange={handleLimitChange}
+          value={numberPlayer}
+          onChange={(e) => {
+            setNumberPlayer(e.target.value);
+          }}
           max={20}
         />
       </div>
@@ -75,7 +74,11 @@ function HomePage() {
         </div>
       </div>
       <div className="validation-button-home-page">
-        <button type="button" className="validation-button">
+        <button
+          type="button"
+          className="validation-button"
+          onClick={handleValidationClick}
+        >
           Valider
         </button>
       </div>
