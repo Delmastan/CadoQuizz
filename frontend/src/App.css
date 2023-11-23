@@ -158,3 +158,13 @@ button {
   border: none;
   background: none;
 }
+
+@font-face {
+  font-family: "Title-font";
+  src: url("./assets/fonts/SnowyChristmas.otf");
+}
+
+@font-face {
+  font-family: "Text-font";
+  src: url("./assets/fonts/SnowyDahlia.ttf");
+}
