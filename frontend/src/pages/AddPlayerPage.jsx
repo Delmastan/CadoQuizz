@@ -14,7 +14,7 @@ function AddPlayerPage() {
 
   const handleInputChange = (index, value) => {
     const newPlayerNames = [...playerNames];
-    newPlayerNames[index] = value;
+    newPlayerNames[index] = { name: { value }, points: 0 };
     setPlayerNames(newPlayerNames);
   };
 
