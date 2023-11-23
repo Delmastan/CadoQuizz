@@ -4,20 +4,36 @@ import "./ShowQuestion.scss";
 
 function ShowQuestion() {
   const participants = [
-    "marcelo",
-    "quentin",
-    "tristan",
-    "théo",
-    "adrien",
-    "khachik",
+    "Marcelo",
+    "Quentin",
+    "Tristan",
+    "Théo",
+    "Adrien",
+    "Khachik",
   ];
 
   const data = useLoaderData();
-  //   const [userPoint, setUserPoint] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(false);
   const [index, setIndex] = useState(0);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const formatseconds = time % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(
+      formatseconds
+    ).padStart(2, "0")}`;
+  };
 
   const randomDataAnswer = (badAnswer, Answer) => {
     const mixerAnswer = [...badAnswer, Answer];
@@ -30,44 +46,48 @@ function ShowQuestion() {
       data.quizzes[index].answer
     );
     setShuffledAnswers(mixedAnswers);
-  }, [index]); // Le tableau vide signifie que cela ne doit s'exécuter qu'une fois après le montage du composant
-  // useEffect(()=>(
-  // setIsActive(!isActive);
-  // ),[index])
+  }, [index]);
 
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
     if (userAnswer === data.quizzes[index].answer) {
-      console.info("bonne reponse");
+      console.info("Bonne réponse");
     }
+
     if (index < data.quizzes.length - 1) {
-      setIndex((previndex) => previndex + 1);
+      setIndex((prevIndex) => prevIndex + 1);
       setIsClose(!isClose);
     }
-    setIsActive(isActive);
-    // setIsActive(false);
+
+    setIsActive(true);
   };
+
   const CloseModale = () => {
     setIsClose(!isClose);
   };
+
   return (
     <div className="ShoWQ-contain">
       <div
         className="ShowQ-modal"
-        style={{ display: isClose ? "none" : "block" }}
+        style={{ display: isClose ? "none" : "flex" }}
       >
         <h1 className="ShowQ-title-user">{participants[index]}</h1>
         <button
-          type="button"
           className="ShowQ-button-start"
+          type="button"
           onClick={CloseModale}
         >
           Commencer
         </button>
       </div>
-      <h2>{data.quizzes[index].question}</h2>
-      <article>
+      <article
+        className="ShowQ-section-question"
+        style={{ display: isClose ? "flex" : "none" }}
+      >
+        {isClose && <p>{formatTime(seconds)}</p>}
+        <h2>{data.quizzes[index].question}</h2>
         {data.quizzes.length &&
           shuffledAnswers.map((answer) => (
             <button
