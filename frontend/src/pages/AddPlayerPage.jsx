@@ -19,6 +19,13 @@ function AddPlayerPage() {
   };
 
   const handleClick = () => {
+    // Vérifier si au moins un nom est vide
+    if (playersData.some((player) => player.name.trim() === "")) {
+      // eslint-disable-next-line no-alert
+      alert("Veuillez remplir tous les noms des joueurs.");
+      return; // Ne pas valider si au moins un nom est vide
+    }
+
     const filteredPlayers = playersData.filter(
       (player) => player.name.trim() !== ""
     );
