@@ -7,8 +7,15 @@ import App from "./App";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
+    children: [
+      { path: "/", element: <>Home Page</> },
+      { path: "/joueur", element: <>Player</> },
+      { path: "/roue", element: <>Roue</> },
+      { path: "/question", element: <>Question</> },
+      { path: "/classement", element: <>Classement</> },
+      { path: "/resultat", element: <>Resultat</> },
+    ],
   },
 ]);
 
