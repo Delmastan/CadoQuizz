@@ -8,7 +8,7 @@ import HomePage from "./components/HomePage/HomePage";
 
 const FecthData = async (limit, category, difficulty) => {
   const response = await fetch(
-    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&categoty${category}&difficulty=${difficulty}`
+    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&category${category}&difficulty=${difficulty}`
   );
   const jsonData = await response.json();
   return jsonData;
