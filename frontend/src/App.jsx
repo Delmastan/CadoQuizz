@@ -2,12 +2,14 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import "./App.css";
+import PlayerProvider from "./contexts/PlayerContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <h1 className="context">
+    <PlayerProvider>
       <nav>
-        <p>Navbar</p>
+        <Navbar />
       </nav>
       <main>
         <Outlet />
@@ -15,7 +17,7 @@ function App() {
       <footer>
         <p>footer</p>
       </footer>
-    </h1>
+    </PlayerProvider>
   );
 }
 

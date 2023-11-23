@@ -1,0 +1,14 @@
+.addplayerpage-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+  gap: 8px;
+  margin-block: 16px;
+  div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 80%;
+  }
+}

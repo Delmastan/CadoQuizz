@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import ShowQuestion from "./components/ShowQuestion/ShowQuestion";
+import AddPlayerPage from "./pages/AddPlayerPage";
+import HomePage from "./components/HomePage/HomePage";
 
 const FecthData = async (limit, category, difficulty) => {
   const response = await fetch(
@@ -16,8 +18,8 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: "/", element: <>Home Page</> },
-      { path: "/joueur", element: <>Player</> },
+      { path: "/", element: <HomePage /> },
+      { path: "/joueur", element: <AddPlayerPage /> },
       { path: "/roue", element: <>Roue</> },
       {
         path: "/demarrer",
