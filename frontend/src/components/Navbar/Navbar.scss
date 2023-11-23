@@ -1,8 +1,6 @@
 .navbar-container {
   display: flex;
   background-color: #ff7878;
-  border-bottom-right-radius: 16px;
-  border-bottom-left-radius: 16px;
   align-items: center;
   position: relative;
   .navbar-logo {
@@ -13,7 +11,7 @@
     align-items: center;
     p {
       color: #fff;
-      font-size: 4rem;
+      font-size: 2.5rem;
       font-family: Title-font;
     }
   }

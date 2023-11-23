@@ -1,5 +1,5 @@
-import navBurger from "../assets/icons/burger.svg";
-import logo from "../assets/icons/cadoquiz.svg";
+import navBurger from "../../assets/icons/burger.svg";
+import logo from "../../assets/icons/cadoquiz.svg";
 
 import "./Navbar.scss";
 
