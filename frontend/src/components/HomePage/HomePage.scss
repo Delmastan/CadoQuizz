@@ -1,0 +1,58 @@
+.home-page {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../assets/imagehomepage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .title-home-page {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  .field-home-page {
+    font-size: 24px;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+
+    #input-field-home-page {
+      background: white;
+    }
+  }
+  .difficulty-home-page {
+    h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 8px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+
+      &.selected {
+        border: 2px solid 378b29;
+      }
+    }
+
+    .easy-button,
+    .normal-button,
+    .difficult-button {
+      background-color: white;
+
+      &.selected {
+        background-color: #74d680;
+      }
+    }
+  }
+}

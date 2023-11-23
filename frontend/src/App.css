@@ -133,3 +133,9 @@ button {
   border: none;
   margin: 0;
 }
+
+/* Font-style */
+@font-face {
+  font-family: "Flake";
+  src: url("./assets/fonts/PWHappyChristmas.ttf");
+}
