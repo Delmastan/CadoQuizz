@@ -1,29 +1,45 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useOptions } from "../../contexts/PlayerContext";
 import "./ShowQuestion.scss";
 
-function Timer({ isClose, resetTimer, reset }) {
-  const [seconds, setSeconds] = useState(0);
+// Fonction pour récupérer les données du quiz depuis l'API
+const fetchData = async (limit, category, difficulty) => {
+  const response = await fetch(
+    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&category=${category}&difficulty=${difficulty}`
+  );
+  const jsonData = await response.json();
+  return jsonData;
+};
+
+// Fonction pour mélanger les réponses
+const randomDataAnswer = (badAnswer, Answer) => {
+  const mixerAnswer = [...badAnswer, Answer];
+  const shuffledAnswer = mixerAnswer.sort(() => Math.random() - 0.5);
+  return shuffledAnswer;
+};
+
+// Composant Timer qui gère la minuterie
+function Timer({ isClose, resetTimer, reset, onTimeChange }) {
+  const [seconds, setSeconds] = useState(30);
 
   useEffect(() => {
-    let intervalId;
-
-    if (isClose) {
-      intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
-    }
+    const timerId = setInterval(() => {
+      if (isClose && seconds > 0) {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+        onTimeChange(seconds - 1);
+      }
+    }, 1000);
 
     return () => {
-      clearInterval(intervalId);
+      clearInterval(timerId);
       resetTimer();
     };
-  }, [isClose, resetTimer, reset]); // Ajouter reset comme dépendance
+  }, [isClose, resetTimer, reset, seconds, onTimeChange]);
 
   useEffect(() => {
     if (reset) {
-      setSeconds(0);
+      setSeconds(30);
     }
   }, [reset]);
 
@@ -38,45 +54,77 @@ function Timer({ isClose, resetTimer, reset }) {
   return <p>{formatTime(seconds)}</p>;
 }
 
+// Composant principal ShowQuestion
 function ShowQuestion() {
-  const participants = [
-    "Marcelo",
-    "Quentin",
-    "Tristan",
-    "Théo",
-    "Adrien",
-    "Khachik",
-  ];
-
-  const data = useLoaderData();
+  const { players, category, limit, difficulty } = useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
   const [index, setIndex] = useState(0);
-  const [resetTimer, setResetTimer] = useState(false); // Nouvel état resetTimer
+  const [resetTimer, setResetTimer] = useState(false);
+  const [quizData, setQuizData] = useState(null);
+  const [elapsedTime, setElapsedTime] = useState(30);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
-  const randomDataAnswer = (badAnswer, Answer) => {
-    const mixerAnswer = [...badAnswer, Answer];
-    const shuffledAnswer = mixerAnswer.sort(() => Math.random() - 0.5);
-    return shuffledAnswer;
+  // Effet pour récupérer les données du quiz lorsqu'il y a des participants
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      const result = await fetchData(limit, category, difficulty);
+      setQuizData(result);
+      // Mélanger les réponses une seule fois lors de l'initialisation
+      setShuffledAnswers(
+        randomDataAnswer(result.quizzes[index].badAnswers, result.quizzes[index].answer)
+      );
+    };
+
+    if (players.length > 0) {
+      fetchQuizData();
+    }
+}, [players, category, limit, difficulty, index]);
+
+// Fonction pour attribuer des points en fonction du temps écoulé
+const calculatePoints = () => {
+    const maxPoints = 100;
+    const timeLimit = 30;
+    
+    // elapsedTime représente le temps écoulé depuis le début de la question jusqu'à la réponse du joueur
+    // elapsedTime est supposé être un nombre décroissant de 30 à 0
+    // (30 secondes au début et 0 secondes lorsque le temps est écoulé)
+    const elapsedTimeRatio =  (elapsedTime / timeLimit);
+  
+    // La formule ajustée pour attribuer plus de points pour des réponses plus rapides
+    const points = Math.max(0, Math.round(elapsedTimeRatio * maxPoints));
+  
+    return points;
   };
-
+  // Fonction pour gérer le clic sur une réponse
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
-    if (userAnswer === data.quizzes[index].answer) {
-      console.info("Bonne réponse");
+    if (userAnswer === quizData.quizzes[index].answer) {
+        players[index].points += calculatePoints()
+        console.log(players[index].points);
+        console.info("Bonne réponse");
+    }else{
+        console.log(players[index].points);
     }
+        
 
-    if (index < participants.length - 1) {
+    if (index < players.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
       setIsClose(true);
-      setResetTimer(true); // Activer la réinitialisation du timer
+      setResetTimer(true);
+      // Mélanger les réponses pour la question suivante
+      setShuffledAnswers(
+        randomDataAnswer(quizData.quizzes[index + 1].badAnswers, quizData.quizzes[index + 1].answer)
+      );
     }
   };
 
+  // Fonction de rappel pour réinitialiser la minuterie
   const resetTimerCallback = () => {
-    setResetTimer(false); // Désactiver la réinitialisation du timer
+    setResetTimer(false);
   };
+
 
   return (
     <div className="ShoWQ-contain">
@@ -86,13 +134,13 @@ function ShowQuestion() {
       >
         {isActive && (
           <>
-            <h1 className="ShowQ-title-user">{participants[index]}</h1>
+            <h1 className="ShowQ-title-user">{players[index].name}</h1>
             <button
               className="ShowQ-button-start"
               type="button"
               onClick={() => {
                 setIsClose(false);
-                resetTimerCallback(); // Utiliser le callback pour désactiver la réinitialisation du timer
+                resetTimerCallback();
               }}
             >
               Commencer
@@ -109,24 +157,21 @@ function ShowQuestion() {
             isClose={!isClose}
             resetTimer={resetTimerCallback}
             reset={resetTimer}
+            onTimeChange={setElapsedTime}
           />
         )}
-        <h2>{data.quizzes[index].question}</h2>
-        {data.quizzes.length &&
-          randomDataAnswer(
-            data.quizzes[index].badAnswers,
-            data.quizzes[index].answer
-          ).map((answer) => (
-            <button
-              key={answer}
-              id={answer}
-              type="button"
-              className="ShoQ-button-answer"
-              onClick={(e) => handleClick(e)}
-            >
-              {answer}
-            </button>
-          ))}
+        <h2>{quizData && quizData.quizzes[index].question}</h2>
+        {shuffledAnswers.map((answer) => (
+          <button
+            key={answer}
+            id={answer}
+            type="button"
+            className="ShoQ-button-answer"
+            onClick={(e) => handleClick(e)}
+          >
+            {answer}
+          </button>
+        ))}
       </article>
     </div>
   );
