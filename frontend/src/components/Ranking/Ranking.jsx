@@ -1,15 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import "./Ranking.scss";
-// import { useOptions } from "../../contexts/PlayerContext";
+import { useOptions } from "../../contexts/PlayerContext";
 
 function Ranking() {
-  const players = [
-    { name: "Tristan", points: 150 },
-    { name: "Marcelo", points: 200 },
-    { name: "Quentin", points: 170 },
-    { name: "Arthur", points: 300 },
-    { name: "Cyrille", points: 250 },
-  ];
+  const { players } = useOptions();
 
   const sortedPlayers = players.slice().sort((a, b) => b.points - a.points);
 
