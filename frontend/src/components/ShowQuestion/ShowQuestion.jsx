@@ -1,7 +1,15 @@
-/* eslint-disable */
+/* eslint-disable*/
 import React, { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useOptions } from "../../contexts/PlayerContext";
 import "./ShowQuestion.scss";
+
+const fetchData = async (limit, category, difficulty) => {
+  const response = await fetch(
+    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&category=${category}&difficulty=${difficulty}`
+  );
+  const jsonData = await response.json();
+  return jsonData;
+};
 
 function Timer({ isClose, resetTimer, reset }) {
   const [seconds, setSeconds] = useState(0);
@@ -19,7 +27,7 @@ function Timer({ isClose, resetTimer, reset }) {
       clearInterval(intervalId);
       resetTimer();
     };
-  }, [isClose, resetTimer, reset]); // Ajouter reset comme dépendance
+  }, [isClose, resetTimer, reset]);
 
   useEffect(() => {
     if (reset) {
@@ -39,21 +47,13 @@ function Timer({ isClose, resetTimer, reset }) {
 }
 
 function ShowQuestion() {
-  const participants = [
-    "Marcelo",
-    "Quentin",
-    "Tristan",
-    "Théo",
-    "Adrien",
-    "Khachik",
-  ];
-
-  const data = useLoaderData();
+  const { players, category, limit, difficulty } = useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
   const [index, setIndex] = useState(0);
-  const [resetTimer, setResetTimer] = useState(false); // Nouvel état resetTimer
-
+  const [resetTimer, setResetTimer] = useState(false);
+  const [quizData, setQuizData] = useState(null);
+  console.log(players);
   const randomDataAnswer = (badAnswer, Answer) => {
     const mixerAnswer = [...badAnswer, Answer];
     const shuffledAnswer = mixerAnswer.sort(() => Math.random() - 0.5);
@@ -63,20 +63,31 @@ function ShowQuestion() {
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
-    if (userAnswer === data.quizzes[index].answer) {
+    if (userAnswer === quizData.quizzes[index].answer) {
       console.info("Bonne réponse");
     }
 
-    if (index < participants.length - 1) {
+    if (index < players.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
       setIsClose(true);
-      setResetTimer(true); // Activer la réinitialisation du timer
+      setResetTimer(true);
     }
   };
 
   const resetTimerCallback = () => {
-    setResetTimer(false); // Désactiver la réinitialisation du timer
+    setResetTimer(false);
   };
+
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      const result = await fetchData(limit, category, difficulty);
+      setQuizData(result);
+    };
+
+    if (players.length > 0) {
+      fetchQuizData();
+    }
+  }, [players, category, limit, difficulty]);
 
   return (
     <div className="ShoWQ-contain">
@@ -86,13 +97,13 @@ function ShowQuestion() {
       >
         {isActive && (
           <>
-            <h1 className="ShowQ-title-user">{participants[index]}</h1>
+            <h1 className="ShowQ-title-user">{players[index]}</h1>
             <button
               className="ShowQ-button-start"
               type="button"
               onClick={() => {
                 setIsClose(false);
-                resetTimerCallback(); // Utiliser le callback pour désactiver la réinitialisation du timer
+                resetTimerCallback();
               }}
             >
               Commencer
@@ -111,11 +122,11 @@ function ShowQuestion() {
             reset={resetTimer}
           />
         )}
-        <h2>{data.quizzes[index].question}</h2>
-        {data.quizzes.length &&
+        <h2>{quizData && quizData.quizzes[index].question}</h2>
+        {quizData &&
           randomDataAnswer(
-            data.quizzes[index].badAnswers,
-            data.quizzes[index].answer
+            quizData.quizzes[index].badAnswers,
+            quizData.quizzes[index].answer
           ).map((answer) => (
             <button
               key={answer}

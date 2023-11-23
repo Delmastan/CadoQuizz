@@ -30,4 +30,10 @@ PlayerProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useOptions = () => useContext(ApiContext);
+export const useOptions = () => {
+  const context = useContext(ApiContext);
+  if (!context) {
+    throw new Error("useOptions must be used within a PlayerProvider");
+  }
+  return context;
+};
