@@ -7,6 +7,7 @@ import AddPlayerPage from "./pages/AddPlayerPage";
 import HomePage from "./components/HomePage/HomePage";
 import Roulette from "./components/Roulette/Roulette";
 import ActualRanking from "./pages/ActualRanking";
+import FinalResults from "./pages/FinalResults";
 
 const FecthData = async (limit, category, difficulty) => {
   const response = await fetch(
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         },
       },
       { path: "/classement", element: <ActualRanking /> },
-      { path: "/resultat", element: <>Resultat</> },
+      { path: "/resultat", element: <FinalResults /> },
     ],
   },
 ]);
