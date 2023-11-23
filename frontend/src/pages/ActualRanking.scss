@@ -1,0 +1,46 @@
+.actualranking-container {
+  background-image: url("../assets/imagehomepage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-block: 16px;
+  min-height: calc(100vh - 100px);
+  .actualranking-title {
+    background-color: #74d680;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: "Text-font";
+    font-size: 5rem;
+    border-radius: 16px;
+    border: 10px solid #378b29;
+
+    p {
+      font-size: 3rem;
+    }
+  }
+  button {
+    background: #ff7878;
+    border: 10px solid red;
+    border-radius: 16px;
+    width: fit-content;
+    padding: 16px;
+    padding-inline: 30px;
+    font-family: "Text-font";
+    font-size: 3rem;
+    box-shadow: 2px 2px 2px;
+  }
+  button:hover {
+    box-shadow: 6px 6px 2px;
+  }
+
+  button:active {
+    box-shadow: 0px 0px 0px;
+  }
+}

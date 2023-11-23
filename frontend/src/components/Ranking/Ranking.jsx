@@ -29,7 +29,6 @@ function Ranking() {
               : "ranking-looser"
           }
         >
-          <p>{index + 1}</p>
           <p>{player.name}</p>
           <p>{player.points}</p>
         </div>
