@@ -43,32 +43,40 @@ function HomePage() {
       </div>
       <div className="difficulty-home-page">
         <h2>Choisissez la difficulté</h2>
-        <button
-          type="button"
-          className={`easy-button ${
-            selectedDifficulty === "facile" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("facile")}
-        >
-          Facile
-        </button>
-        <button
-          type="button"
-          className={`normal-button ${
-            selectedDifficulty === "normal" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("normal")}
-        >
-          Normal
-        </button>
-        <button
-          type="button"
-          className={`difficult-button ${
-            selectedDifficulty === "difficile" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("difficile")}
-        >
-          Difficile
+        <div className="button-home-page">
+          {" "}
+          <button
+            type="button"
+            className={`easy-button ${
+              selectedDifficulty === "facile" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("facile")}
+          >
+            Facile
+          </button>
+          <button
+            type="button"
+            className={`normal-button ${
+              selectedDifficulty === "normal" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("normal")}
+          >
+            Normal
+          </button>
+          <button
+            type="button"
+            className={`difficult-button ${
+              selectedDifficulty === "difficile" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("difficile")}
+          >
+            Difficile
+          </button>
+        </div>
+      </div>
+      <div className="validation-button-home-page">
+        <button type="button" className="validation-button">
+          Valider
         </button>
       </div>
       <div />

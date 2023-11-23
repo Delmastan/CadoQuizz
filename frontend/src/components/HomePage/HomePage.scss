@@ -26,33 +26,47 @@
     }
   }
   .difficulty-home-page {
+    width: 70%;
+
     h2 {
       margin-bottom: 10px;
       text-align: center;
       font-weight: bold;
       font-size: 24px;
     }
+    .button-home-page {
+      display: flex;
+      justify-content: space-around;
+      button {
+        margin-right: 10px;
+        padding: 8px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 15px;
 
-    button {
-      margin-right: 10px;
-      padding: 8px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      border-radius: 15px;
+        &.selected {
+          border: 2px solid 378b29;
+        }
+      }
 
-      &.selected {
-        border: 2px solid 378b29;
+      .easy-button,
+      .normal-button,
+      .difficult-button {
+        background-color: white;
+
+        &.selected {
+          background-color: #74d680;
+        }
       }
     }
-
-    .easy-button,
-    .normal-button,
-    .difficult-button {
+  }
+  .validation-button-home-page {
+    .validation-button {
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 40px;
+      border: 1px solid;
       background-color: white;
-
-      &.selected {
-        background-color: #74d680;
-      }
     }
   }
 }
