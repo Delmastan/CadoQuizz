@@ -6,7 +6,7 @@ import ShowQuestion from "./components/ShowQuestion/ShowQuestion";
 import AddPlayerPage from "./pages/AddPlayerPage";
 import HomePage from "./components/HomePage/HomePage";
 import Roulette from "./components/Roulette/Roulette";
-import Ranking from "./components/Ranking/Ranking";
+import ActualRanking from "./pages/ActualRanking";
 
 const FecthData = async (limit, category, difficulty) => {
   const response = await fetch(
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
           return FecthData(6, "tv_cinema", "facile");
         },
       },
-      { path: "/classement", element: <Ranking /> },
+      { path: "/classement", element: <ActualRanking /> },
       { path: "/resultat", element: <>Resultat</> },
     ],
   },
