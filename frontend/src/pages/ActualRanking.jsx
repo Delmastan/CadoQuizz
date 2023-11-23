@@ -1,15 +1,22 @@
-import "./ActualRanking.scss";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Ranking from "../components/Ranking/Ranking";
 import { useOptions } from "../contexts/PlayerContext";
+import "./ActualRanking.scss";
 
 function ActualRanking() {
   const { cycle, setCycle } = useOptions();
   const navigate = useNavigate();
+  const [isFinal, setIsFinal] = useState(true);
+  const maxRound = 8;
 
   const handleClick = () => {
-    setCycle(cycle + 1);
-    navigate("/roulette");
+    if (cycle < maxRound) {
+      setCycle(cycle + 1);
+      navigate("/roue");
+    } else {
+      setIsFinal(false);
+    }
   };
 
   return (
@@ -19,9 +26,12 @@ function ActualRanking() {
         <p>Round {cycle}</p>
       </div>
       <Ranking />
-      <button type="button" onClick={handleClick}>
-        Suivant
-      </button>
+      {isFinal && (
+        <button type="button" onClick={handleClick}>
+          Suivant
+        </button>
+      )}
+      ;
     </div>
   );
 }
