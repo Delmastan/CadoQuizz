@@ -5,10 +5,11 @@ import App from "./App";
 import ShowQuestion from "./components/ShowQuestion/ShowQuestion";
 import AddPlayerPage from "./pages/AddPlayerPage";
 import HomePage from "./components/HomePage/HomePage";
+import Roulette from "./components/Roulette/Roulette";
 
 const FecthData = async (limit, category, difficulty) => {
   const response = await fetch(
-    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&categoty${category}&difficulty=${difficulty}`
+    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&category${category}&difficulty=${difficulty}`
   );
   const jsonData = await response.json();
   return jsonData;
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/joueur", element: <AddPlayerPage /> },
-      { path: "/roue", element: <>Roue</> },
+      { path: "/roulette", element: <Roulette /> },
       {
         path: "/demarrer",
         element: <ShowQuestion />,
