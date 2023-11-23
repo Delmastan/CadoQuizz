@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOptions } from "../contexts/PlayerContext";
 import "./AddPlayerPage.scss";
@@ -8,32 +8,42 @@ function AddPlayerPage() {
 
   const navigate = useNavigate();
 
-  const [playerNames, setPlayerNames] = useState(
-    Array.from({ length: limit }, () => "")
+  const [playersData, setPlayersData] = useState(
+    Array.from({ length: limit }, () => ({ name: "", points: 0 }))
   );
 
-  const handleInputChange = (index, value) => {
-    const newPlayerNames = [...playerNames];
-    newPlayerNames[index] = { name: { value }, points: 0 };
-    setPlayerNames(newPlayerNames);
+  const handleInputChange = (index, fieldName, value) => {
+    const newPlayersData = [...playersData];
+    newPlayersData[index][fieldName] = value;
+    setPlayersData(newPlayersData);
   };
 
   const handleClick = () => {
-    setPlayers(playerNames);
+    const filteredPlayers = playersData.filter(
+      (player) => player.name.trim() !== ""
+    );
+    setPlayers(filteredPlayers);
     navigate(`/roue`);
   };
 
+  useEffect(() => {
+    if (!limit) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="addplayerpage-container">
-      {playerNames.map((value, index) => (
+      {playersData.map((player, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <div key={index}>
           <label>Player {index + 1}</label>
           <input
             type="text"
+            placeholder={`Player ${index + 1} name`}
             className="addplayerpage-input"
-            value={value}
-            onChange={(e) => handleInputChange(index, e.target.value)}
+            value={player.name}
+            onChange={(e) => handleInputChange(index, "name", e.target.value)}
           />
         </div>
       ))}

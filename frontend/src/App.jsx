@@ -8,17 +8,19 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <PlayerProvider>
-      <nav>
-        <Navbar />
-      </nav>
-      <main>
-        <Outlet />
-      </main>
-      <footer>
-        <Footer />
-      </footer>
-    </PlayerProvider>
+    <div className="app-container">
+      <PlayerProvider>
+        <nav>
+          <Navbar />
+        </nav>
+        <main>
+          <Outlet />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </PlayerProvider>
+    </div>
   );
 }
 
