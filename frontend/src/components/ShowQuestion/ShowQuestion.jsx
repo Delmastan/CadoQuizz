@@ -1,12 +1,14 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useOptions } from "../../contexts/PlayerContext";
+import { useNavigate } from 'react-router-dom';
+
 import "./ShowQuestion.scss";
 
 // Fonction pour récupérer les données du quiz depuis l'API
 const fetchData = async (limit, category, difficulty) => {
   const response = await fetch(
-    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=${limit}&category=${category}&difficulty=${difficulty}`
+    `https://quizzapi.jomoreschi.fr/api/v1/quiz?limit=10&category=${category}`
   );
   const jsonData = await response.json();
   return jsonData;
@@ -56,6 +58,7 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
 
 // Composant principal ShowQuestion
 function ShowQuestion() {
+    const navigate = useNavigate();
   const { players, category, limit, difficulty } = useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
@@ -107,8 +110,6 @@ const calculatePoints = () => {
     }else{
         console.log(players[index].points);
     }
-        
-
     if (index < players.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
       setIsClose(true);
@@ -117,7 +118,10 @@ const calculatePoints = () => {
       setShuffledAnswers(
         randomDataAnswer(quizData.quizzes[index + 1].badAnswers, quizData.quizzes[index + 1].answer)
       );
+    }else{
+        navigate('/classement');
     }
+
   };
 
   // Fonction de rappel pour réinitialiser la minuterie
