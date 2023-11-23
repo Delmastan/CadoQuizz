@@ -20,7 +20,7 @@ function AddPlayerPage() {
 
   const handleClick = () => {
     setPlayers(playerNames);
-    navigate(`/roulette`);
+    navigate(`/roue`);
   };
 
   return (
