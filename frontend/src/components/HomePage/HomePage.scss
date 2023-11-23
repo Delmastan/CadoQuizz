@@ -10,62 +10,54 @@
   min-height: calc(100vh - 100px);
 
   .title-home-page {
-    font-size: 48px;
+    font-size: 92px;
     font-weight: bold;
+    font-family: "Title-font";
   }
 
   .field-home-page {
-    font-size: 24px;
+    font-size: 64px;
     padding: 8px;
     text-align: center;
     font-weight: bold;
+    font-family: "Text-font";
 
     #input-field-home-page {
-      background: white;
+      background: #74d680;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      text-align: center;
     }
   }
   .difficulty-home-page {
     width: 70%;
+    text-align: center;
 
     h2 {
       margin-bottom: 10px;
       text-align: center;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 64px;
+      font-family: "Text-font";
     }
-    .button-home-page {
-      display: flex;
-      justify-content: space-around;
-      button {
-        margin-right: 10px;
-        padding: 8px;
-        cursor: pointer;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-
-        &.selected {
-          border: 2px solid 378b29;
-        }
-      }
-
-      .easy-button,
-      .normal-button,
-      .difficult-button {
-        background-color: white;
-
-        &.selected {
-          background-color: #74d680;
-        }
-      }
+    #input-cycle-home-page {
+      background: #74d680;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      text-align: center;
     }
   }
   .validation-button-home-page {
     .validation-button {
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 40px;
+      font-size: 80px;
       border: 1px solid;
-      background-color: white;
+      cursor: pointer;
+      border-radius: 16px;
+      border: 10px solid #378b29;
+      background-color: #74d680;
+      font-family: "Text-font";
     }
   }
 }
