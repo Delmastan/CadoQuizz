@@ -1,27 +1,24 @@
 import React, { useState } from "react";
 import "./HomePage.scss";
+import { useNavigate } from "react-router-dom";
 import { useOptions } from "../../contexts/PlayerContext";
 
 function HomePage() {
-  const { difficulty, limit, setDifficulty, setLimit } = useOptions();
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const { setDifficulty, setLimit } = useOptions();
+  const [selectedDifficulty, setSelectedDifficulty] = useState("facile");
+  const [numberPlayer, setNumberPlayer] = useState();
+  const navigate = useNavigate();
 
   // eslint-disable-next-line no-shadow
-  const handleDifficultySelect = (difficulty) => {
-    setSelectedDifficulty(difficulty);
-    setDifficulty(difficulty);
+  const handleDifficultySelect = (choice) => {
+    setSelectedDifficulty(choice);
+    setDifficulty(selectedDifficulty);
   };
-  // eslint-disable-next-line no-restricted-syntax
-  console.log(difficulty);
-  const handleLimitChange = (event) => {
-    let newLimit = event.target.value;
 
-    newLimit = Math.min(newLimit, 20);
-
-    setLimit(newLimit);
+  const handleValidationClick = () => {
+    setLimit(numberPlayer);
+    navigate(`/joueur`);
   };
-  // eslint-disable-next-line no-restricted-syntax
-  console.log(limit);
 
   return (
     <div className="home-page">
@@ -36,39 +33,53 @@ function HomePage() {
           type="text"
           id="input-field-home-page"
           name="input"
-          value={limit}
-          onChange={handleLimitChange}
+          value={numberPlayer}
+          onChange={(e) => {
+            setNumberPlayer(e.target.value);
+          }}
           max={20}
         />
       </div>
       <div className="difficulty-home-page">
         <h2>Choisissez la difficulté</h2>
+        <div className="button-home-page">
+          {" "}
+          <button
+            type="button"
+            className={`easy-button ${
+              selectedDifficulty === "facile" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("facile")}
+          >
+            Facile
+          </button>
+          <button
+            type="button"
+            className={`normal-button ${
+              selectedDifficulty === "normal" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("normal")}
+          >
+            Normal
+          </button>
+          <button
+            type="button"
+            className={`difficult-button ${
+              selectedDifficulty === "difficile" ? "selected" : ""
+            }`}
+            onClick={() => handleDifficultySelect("difficile")}
+          >
+            Difficile
+          </button>
+        </div>
+      </div>
+      <div className="validation-button-home-page">
         <button
           type="button"
-          className={`easy-button ${
-            selectedDifficulty === "facile" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("facile")}
+          className="validation-button"
+          onClick={handleValidationClick}
         >
-          Facile
-        </button>
-        <button
-          type="button"
-          className={`normal-button ${
-            selectedDifficulty === "normal" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("normal")}
-        >
-          Normal
-        </button>
-        <button
-          type="button"
-          className={`difficult-button ${
-            selectedDifficulty === "difficile" ? "selected" : ""
-          }`}
-          onClick={() => handleDifficultySelect("difficile")}
-        >
-          Difficile
+          Valider
         </button>
       </div>
       <div />
