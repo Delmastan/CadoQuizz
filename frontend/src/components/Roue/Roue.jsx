@@ -48,12 +48,14 @@ export default function Roue() {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const navigate = useNavigate();
+  const [canProceed, setCanProceed] = useState(false);
 
   const handleSpinClick = () => {
     if (!mustSpin) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
       setPrizeNumber(newPrizeNumber);
       setMustSpin(true);
+      setCanProceed(false);
     }
   };
 
@@ -63,6 +65,9 @@ export default function Roue() {
 
   return (
     <div className="roue-component">
+      <button type="button" className="button-spin" onClick={handleSpinClick}>
+        Tourne la roue !
+      </button>
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
@@ -71,17 +76,21 @@ export default function Roue() {
           setMustSpin(false);
           setPrizeNumber((prevPrizeNumber) => {
             setCategory(data[prevPrizeNumber].category);
+            setCanProceed(true);
             // eslint-disable-next-line no-restricted-syntax
             console.log(data[prevPrizeNumber].category);
             return prevPrizeNumber;
           });
         }}
         textDistance={70}
+        spinDuration={0.01}
       />
-      <button type="button" onClick={handleSpinClick}>
-        SPIN
-      </button>
-      <button type="button" onClick={handleValidationClick}>
+      <button
+        type="button"
+        className="button-next"
+        onClick={handleValidationClick}
+        disabled={!canProceed || setCategory === undefined}
+      >
         Suivant
       </button>
     </div>

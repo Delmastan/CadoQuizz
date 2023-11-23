@@ -2,9 +2,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  width: -100vw;
+  height: 100vh;
+  background-image: url("../../assets/imagehomepage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: 0;
 
-  button {
-    font-size: 48px;
+  .button-spin {
+    font-size: 64px;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 10px solid #378b29;
+    background-color: #74d680;
+    font-family: "Text-font";
+  }
+
+  .button-next {
+    font-size: 64px;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 10px solid #378b29;
+    background-color: #74d680;
+    font-family: "Text-font";
   }
 }
