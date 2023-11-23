@@ -159,8 +159,12 @@ button {
   background: none;
 }
 
-/* Font-style */
 @font-face {
-  font-family: "Flake";
-  src: url("./assets/fonts/PWHappyChristmas.ttf");
+  font-family: "Title-font";
+  src: url("./assets/fonts/SnowyChristmas.otf");
+}
+
+@font-face {
+  font-family: "Text-font";
+  src: url("./assets/fonts/SnowyDahlia.ttf");
 }

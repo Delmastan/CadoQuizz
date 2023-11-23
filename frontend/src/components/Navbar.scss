@@ -1,0 +1,20 @@
+.navbar-container {
+  display: flex;
+  background-color: #ff7878;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  align-items: center;
+  position: relative;
+  .navbar-logo {
+    position: absolute;
+
+    left: calc(50% - 80px);
+    display: flex;
+    align-items: center;
+    p {
+      color: #fff;
+      font-size: 4rem;
+      font-family: Title-font;
+    }
+  }
+}

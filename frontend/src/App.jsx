@@ -3,12 +3,13 @@ import { Outlet } from "react-router-dom";
 
 import "./App.css";
 import PlayerProvider from "./contexts/PlayerContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <PlayerProvider>
       <nav>
-        <p>Navbar</p>
+        <Navbar />
       </nav>
       <main>
         <Outlet />
