@@ -55,6 +55,7 @@ function Roulette() {
           Démarrer
         </Button>
       </div>
+      <div className="test-roulette-component">""</div>
     </div>
   );
 }
