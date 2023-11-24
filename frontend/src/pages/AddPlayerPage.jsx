@@ -19,12 +19,12 @@ function AddPlayerPage() {
   };
 
   const handleClick = () => {
-    // Vérifier si au moins un nom est vide
-    if (playersData.some((player) => player.name.trim() === "")) {
-      // eslint-disable-next-line no-alert
-      alert("Veuillez remplir tous les noms des joueurs.");
-      return; // Ne pas valider si au moins un nom est vide
-    }
+    // // Vérifier si au moins un nom est vide
+    // if (playersData.some((player) => player.name.trim() === "")) {
+    //   // eslint-disable-next-line no-alert
+    //   alert("Veuillez remplir tous les noms des joueurs.");
+    //   return; // Ne pas valider si au moins un nom est vide
+    // }
 
     const filteredPlayers = playersData.filter(
       (player) => player.name.trim() !== ""
@@ -41,20 +41,27 @@ function AddPlayerPage() {
 
   return (
     <div className="addplayerpage-container">
-      {playersData.map((player, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div key={index}>
-          <label>Player {index + 1}</label>
-          <input
-            type="text"
-            placeholder={`Player ${index + 1} name`}
-            className="addplayerpage-input"
-            value={player.name}
-            onChange={(e) => handleInputChange(index, "name", e.target.value)}
-          />
-        </div>
-      ))}
-      <button type="button" onClick={handleClick}>
+      <div className="addplayerpage-players">
+        {playersData.map((player, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={index}>
+            <label>Player {index + 1}</label>
+            <input
+              type="text"
+              placeholder={`Player ${index + 1} name`}
+              className="addplayerpage-input"
+              value={player.name}
+              onChange={(e) => handleInputChange(index, "name", e.target.value)}
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        className="addplayerpage-button"
+        type="button"
+        onClick={handleClick}
+        disabled={playersData.some((player) => player.name.trim() === "")}
+      >
         Validation
       </button>
     </div>

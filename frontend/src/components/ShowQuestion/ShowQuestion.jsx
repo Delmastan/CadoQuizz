@@ -59,7 +59,8 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
 // Composant principal ShowQuestion
 function ShowQuestion() {
   const navigate = useNavigate();
-  const { players, category, limit, difficulty, cycle } = useOptions();
+  const { players, category, limit, difficulty, cycle, numberCycle } =
+    useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
   const [index, setIndex] = useState(0);
@@ -103,7 +104,7 @@ function ShowQuestion() {
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
-    if (cycle !== 8) {
+    if (cycle !== numberCycle) {
       if (userAnswer === quizData.quizzes[index].answer) {
         players[index].points += calculatePoints();
         console.log(players[index].points);
