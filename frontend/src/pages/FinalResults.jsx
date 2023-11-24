@@ -3,6 +3,7 @@ import "./FinalResults.scss";
 import { useNavigate } from "react-router-dom";
 import Ranking from "../components/Ranking/Ranking";
 import { useOptions } from "../contexts/PlayerContext";
+import ConfettiComponent from "../components/ConfetiesScript";
 
 function FinalResults() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function FinalResults() {
 
   return (
     <div className="finalresults-container">
+      <ConfettiComponent />
       <button
         type="button"
         className="finalresults-modal"
