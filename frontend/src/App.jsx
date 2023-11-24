@@ -10,9 +10,7 @@ function App() {
   return (
     <div className="app-container">
       <PlayerProvider>
-        <nav>
-          <Navbar />
-        </nav>
+        <Navbar />
         <main>
           <Outlet />
         </main>

@@ -10,8 +10,8 @@
   align-items: center;
   gap: 16px;
   padding-block: 16px;
-  min-height: calc(100vh - 100px);
-
+  height: calc(100vh - 100px);
+  overflow-y: auto;
   .addplayerpage-players {
     display: flex;
     flex-direction: column;
