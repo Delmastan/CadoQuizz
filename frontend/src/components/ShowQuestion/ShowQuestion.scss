@@ -3,7 +3,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: calc(100dvh - 100px);
   width: 100%;
   position: relative;
   display: flex;
@@ -67,7 +67,7 @@
     justify-content: center;
     position: relative;
     width: 90%;
-    height: 80%;
+    padding-block: 4rem;
     gap: 1rem;
     background: rgba(255, 255, 255, 0.484);
     border-radius: 16px;
