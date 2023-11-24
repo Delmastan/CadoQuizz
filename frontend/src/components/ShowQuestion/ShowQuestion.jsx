@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useOptions } from "../../contexts/PlayerContext";
 import { useNavigate } from "react-router-dom";
+import boule from "../../assets/icons/36.png"
 
 import "./ShowQuestion.scss";
 
@@ -89,11 +90,17 @@ function ShowQuestion() {
 
   // Fonction pour attribuer des points en fonction du temps écoulé
   const calculatePoints = () => {
+  // Fonction pour attribuer des points en fonction du temps écoulé
+  const calculatePoints = () => {
     const maxPoints = 100;
     const timeLimit = 30;
 
+    // elapsedTime représente le temps écoulé depuis le début de la question jusqu'à la réponse du joueur
+    // elapsedTime est supposé être un nombre décroissant de 30 à 0
+    // (30 secondes au début et 0 secondes lorsque le temps est écoulé)
     const elapsedTimeRatio = elapsedTime / timeLimit;
 
+    // La formule ajustée pour attribuer plus de points pour des réponses plus rapides
     const points = Math.max(0, Math.round(elapsedTimeRatio * maxPoints));
 
     return points;
@@ -163,9 +170,14 @@ function ShowQuestion() {
       >
         {isActive && (
           <>
-            <h1 className="ShowQ-title-user">{players[index].name}</h1>
+          <p className="ShowQ-text-user">C'est le tour de
+              <br /></p>
+            <h1 className="ShowQ-title-user">
+              {players[index].name}
+            </h1>
+            <div className="ShowQ-Contain-button-answer">
             <button
-              className="ShowQ-button-start"
+              className="ShoQ-button-answer"
               type="button"
               onClick={() => {
                 setIsClose(false);
@@ -174,6 +186,7 @@ function ShowQuestion() {
             >
               Commencer
             </button>
+            </div>
           </>
         )}
       </div>
@@ -189,21 +202,23 @@ function ShowQuestion() {
             onTimeChange={setElapsedTime}
           />
         )}
-        <h2>{quizData && quizData.quizzes[index].question}</h2>
-        {shuffledAnswers.map((answer) => (
-          <button
-            key={answer}
-            id={answer}
-            type="button"
-            className="ShoQ-button-answer"
-            onClick={(e) => handleClick(e)}
-          >
-            {answer}
-          </button>
-        ))}
+        <img src={boule} className="ShowQ-img-timer"/>
+        <h3>{quizData && quizData.quizzes[index].question}</h3>
+          {shuffledAnswers.map((answer) => (
+            <div key={answer} className="ShowQ-Contain-button-answer">
+            <button
+              id={answer}
+              type="button"
+              className="ShoQ-button-answer"
+              onClick={(e) => handleClick(e)}
+            >
+              {answer}
+            </button>
+        </div>
+          ))}
       </article>
     </div>
   );
 }
-
+}
 export default ShowQuestion;
