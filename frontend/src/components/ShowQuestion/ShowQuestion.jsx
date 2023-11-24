@@ -54,7 +54,7 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
     ).padStart(2, "0")}`;
   };
 
-  return <p>{formatTime(seconds)}</p>;
+  return <p className="ShowQ-time">{formatTime(seconds)}</p>;
 }
 
 // Composant principal ShowQuestion
