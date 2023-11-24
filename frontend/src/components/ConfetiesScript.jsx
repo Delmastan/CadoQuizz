@@ -27,13 +27,12 @@ function ConfettiComponent() {
       }
     };
 
-    frame(); // Initial call to start the confetti animation
+    frame();
 
-    // Cleanup function to stop the animation when the component unmounts
     return () => confetti.reset();
-  }, []); // Empty dependency array ensures that the effect runs only once
+  }, []);
 
-  return <div className="confetti-container" />; // You can style this div as needed
+  return <div className="confetti-container" />;
 }
 
 export default ConfettiComponent;
