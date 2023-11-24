@@ -6,14 +6,14 @@ import { useOptions } from "../contexts/PlayerContext";
 
 function FinalResults() {
   const navigate = useNavigate();
-  const { players } = useOptions();
+  const { limit, players } = useOptions();
   const [isClosed, setIsClosed] = useState(true);
 
   useEffect(() => {
-    if (players.length === 0) {
+    if (!limit) {
       navigate("/");
     }
-  }, [players, navigate]);
+  }, []);
 
   const handleClickRefresh = () => {
     window.location.reload(false);
@@ -30,11 +30,16 @@ function FinalResults() {
         style={{ display: isClosed ? "flex" : "none" }}
         onClick={() => setIsClosed(!isClosed)}
       >
-        <h1>{firstPlayer.name} est le grand gagnant</h1>
-        <p>Il peut donc choisir son cadeau en premier</p>
-        <p className="finalresults-instructions">
-          Les autres joueurs, choisissez vos cadeaux dans l'ordre de vos rangs
-        </p>
+        {firstPlayer && (
+          <>
+            <h1>{firstPlayer.name} est le grand gagnant</h1>
+            <p>Il peut donc choisir son cadeau en premier</p>
+            <p className="finalresults-instructions">
+              Les autres joueurs, choisissez vos cadeaux dans l'ordre de vos
+              rangs
+            </p>
+          </>
+        )}
       </button>
       <h1 className="finalresults-title">Classement Final</h1>
       <Ranking />
