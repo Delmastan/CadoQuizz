@@ -84,6 +84,10 @@ function ShowQuestion() {
       );
     };
 
+    if (!limit && !players.length > 0 && !category){
+      navigate("/");
+    }
+
     if (players.length > 0) {
       fetchQuizData();
     }
@@ -156,11 +160,14 @@ function ShowQuestion() {
   };
 
   return (
+    <>
+    { players.length > 0 && 
+    
     <div className="ShoWQ-contain">
       <div
         className="ShowQ-modal"
         style={{ display: isClose ? "flex" : "none" }}
-      >
+        >
         {isActive && (
           <>
             <p className="ShowQ-text-user">
@@ -176,7 +183,7 @@ function ShowQuestion() {
                   setIsClose(false);
                   resetTimerCallback();
                 }}
-              >
+                >
                 Commencer
               </button>
             </div>
@@ -186,15 +193,15 @@ function ShowQuestion() {
       <article
         className="ShowQ-section-question"
         style={{ display: isActive && !isClose ? "flex" : "none" }}
-      >
+        >
         {isActive && (
           <Timer
-            isClose={!isClose}
+          isClose={!isClose}
             resetTimer={resetTimerCallback}
             reset={resetTimer}
             onTimeChange={setElapsedTime}
-          />
-        )}
+            />
+            )}
         <img src={boule} className="ShowQ-img-timer" />
         <h3>{quizData && quizData.quizzes[index].question}</h3>
         {shuffledAnswers.map((answer) => (
@@ -204,13 +211,15 @@ function ShowQuestion() {
               type="button"
               className="ShoQ-button-answer"
               onClick={(e) => handleClick(e)}
-            >
+              >
               {answer}
             </button>
           </div>
         ))}
       </article>
     </div>
+}
+</>
   );
 }
 
