@@ -89,7 +89,7 @@ export default function Roue() {
           });
         }}
         textDistance={70}
-        spinDuration={0.01}
+        spinDuration={0.5}
       />
       <button
         type="button"
