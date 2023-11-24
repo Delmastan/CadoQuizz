@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useOptions } from "../../contexts/PlayerContext";
 import { useNavigate } from "react-router-dom";
-import boule from "../../assets/icons/36.png"
+import boule from "../../assets/icons/36.png";
 
 import "./ShowQuestion.scss";
 
@@ -91,8 +91,6 @@ function ShowQuestion() {
 
   // Fonction pour attribuer des points en fonction du temps écoulé
   const calculatePoints = () => {
-  // Fonction pour attribuer des points en fonction du temps écoulé
-  const calculatePoints = () => {
     const maxPoints = 100;
     const timeLimit = 30;
 
@@ -120,16 +118,9 @@ function ShowQuestion() {
         console.log(players[index].points);
       }
 
+      // Code spécifique à chaque branche de la condition
       if (index < players.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
-        setIsClose(true);
-        setResetTimer(true);
-        setShuffledAnswers(
-          randomDataAnswer(
-            quizData.quizzes[index + 1].badAnswers,
-            quizData.quizzes[index + 1].answer
-          )
-        );
       } else {
         navigate("/classement");
       }
@@ -144,18 +135,19 @@ function ShowQuestion() {
 
       if (index < players.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
-        setIsClose(true);
-        setResetTimer(true);
-        setShuffledAnswers(
-          randomDataAnswer(
-            quizData.quizzes[index + 1].badAnswers,
-            quizData.quizzes[index + 1].answer
-          )
-        );
       } else {
         navigate("/resultat");
       }
     }
+
+    setIsClose(true);
+    setResetTimer(true);
+    setShuffledAnswers(
+      randomDataAnswer(
+        quizData.quizzes[index + 1].badAnswers,
+        quizData.quizzes[index + 1].answer
+      )
+    );
   };
 
   // Fonction de rappel pour réinitialiser la minuterie
@@ -171,22 +163,22 @@ function ShowQuestion() {
       >
         {isActive && (
           <>
-          <p className="ShowQ-text-user">C'est le tour de
-              <br /></p>
-            <h1 className="ShowQ-title-user">
-              {players[index].name}
-            </h1>
+            <p className="ShowQ-text-user">
+              C'est le tour de
+              <br />
+            </p>
+            <h1 className="ShowQ-title-user">{players[index].name}</h1>
             <div className="ShowQ-Contain-button-answer">
-            <button
-              className="ShoQ-button-answer"
-              type="button"
-              onClick={() => {
-                setIsClose(false);
-                resetTimerCallback();
-              }}
-            >
-              Commencer
-            </button>
+              <button
+                className="ShoQ-button-answer"
+                type="button"
+                onClick={() => {
+                  setIsClose(false);
+                  resetTimerCallback();
+                }}
+              >
+                Commencer
+              </button>
             </div>
           </>
         )}
@@ -203,10 +195,10 @@ function ShowQuestion() {
             onTimeChange={setElapsedTime}
           />
         )}
-        <img src={boule} className="ShowQ-img-timer"/>
+        <img src={boule} className="ShowQ-img-timer" />
         <h3>{quizData && quizData.quizzes[index].question}</h3>
-          {shuffledAnswers.map((answer) => (
-            <div key={answer} className="ShowQ-Contain-button-answer">
+        {shuffledAnswers.map((answer) => (
+          <div key={answer} className="ShowQ-Contain-button-answer">
             <button
               id={answer}
               type="button"
@@ -215,11 +207,11 @@ function ShowQuestion() {
             >
               {answer}
             </button>
-        </div>
-          ))}
+          </div>
+        ))}
       </article>
     </div>
   );
 }
-}
+
 export default ShowQuestion;
