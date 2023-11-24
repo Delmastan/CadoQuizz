@@ -1,0 +1,33 @@
+.roue-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100dvh - 100px);
+  background-image: url("../../assets/imagehomepage.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+
+  .button-spin {
+    font-size: 64px;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 10px solid #378b29;
+    background-color: #74d680;
+    font-family: "Text-font";
+  }
+
+  .button-next {
+    font-size: 64px;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 10px solid #378b29;
+    background-color: #74d680;
+    font-family: "Text-font";
+  }
+}
