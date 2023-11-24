@@ -38,10 +38,10 @@ function AddPlayerPage() {
         {playersData.map((player, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <div key={index}>
-            <label>Player {index + 1}</label>
+            <label>Joueur {index + 1}</label>
             <input
               type="text"
-              placeholder={`Player ${index + 1} name`}
+              placeholder={`Prenom joueur ${index + 1}`}
               className="addplayerpage-input"
               value={player.name}
               onChange={(e) => handleInputChange(index, "name", e.target.value)}
