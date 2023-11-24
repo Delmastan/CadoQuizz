@@ -10,6 +10,7 @@ import Roulette from "./components/Roulette/Roulette";
 import ActualRanking from "./pages/ActualRanking";
 import Roue from "./components/Roue/Roue";
 import FinalResults from "./pages/FinalResults";
+import Ruling from "./components/Ruling/Ruling";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       },
       { path: "/classement", element: <ActualRanking /> },
       { path: "/resultat", element: <FinalResults /> },
+      { path: "/regles", element: <Ruling /> },
     ],
   },
 ]);

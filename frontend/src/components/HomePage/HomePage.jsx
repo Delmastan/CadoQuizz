@@ -20,7 +20,7 @@ function HomePage() {
         <SnowScript />
       </div>
       <div className="title-home-page">
-        <h1>CADOQUIZ</h1>
+        <h1>Cadoquiz</h1>
       </div>
       <div className="field-home-page">
         <div className="text-field-home-page">
