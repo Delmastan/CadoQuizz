@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import MenuBurger from "./menuburger/menuburger";
 import logo from "../../assets/icons/cadoquiz.svg";
 import "./Navbar.scss";
@@ -24,9 +25,12 @@ function Navbar() {
         <div className="menuburger-contain-pages">
           <h3>Menu</h3>
           <ul className="menuburger-conatain-list">
-            <li className="menuburger-conatain-list-details">Acceuil</li>
-            <li className="menuburger-conatain-list-details">About us</li>
-            <li className="menuburger-conatain-list-details">Régles</li>
+            <li className="menuburger-conatain-list-details">
+              <Link to="/">Accueil</Link>
+            </li>
+            <li className="menuburger-conatain-list-details">
+              <Link to="/regles">Régles</Link>
+            </li>
           </ul>
         </div>
         {/* </div> */}
