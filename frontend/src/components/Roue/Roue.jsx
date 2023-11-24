@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import "./Roue.scss";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ const data = [
 ];
 
 export default function Roue() {
-  const { setCategory } = useOptions();
+  const { setCategory, limit } = useOptions();
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const navigate = useNavigate();
@@ -62,6 +62,12 @@ export default function Roue() {
   const handleValidationClick = () => {
     navigate(`/demarrer`);
   };
+
+  useEffect(() => {
+    if (!limit) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="roue-component">
