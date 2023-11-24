@@ -10,9 +10,9 @@
   min-height: calc(100vh - 100px);
 
   .title-home-page {
-    font-size: 92px;
+    font-size: 104px;
     font-weight: bold;
-    font-family: "Title-font";
+    font-family: "Text-font";
   }
 
   .field-home-page {
@@ -50,6 +50,7 @@
     }
   }
   .validation-button-home-page {
+    margin: 16px;
     .validation-button {
       font-size: 80px;
       border: 1px solid;

@@ -28,9 +28,12 @@ function Ruling() {
           catégorie déterminée par la roue.
         </p>
         <p>
+          Vous avez 6 catégories différentes : Art et littérature, TV et cinéma,
+          Sport, Musique, Culture générale et Actualité et politique.
+        </p>
+        <p>
           Les réponses correctes sont récompensées par des points, et la
-          rapclassNameité est également prise en compte pour encourager la
-          vitesse.
+          rapidité est également prise en compte pour stimuler la compétitivité.
         </p>
         <p>
           Chaque question doit être répondue dans un délai maximum de 30
