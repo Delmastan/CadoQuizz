@@ -90,8 +90,6 @@ function ShowQuestion() {
 
   // Fonction pour attribuer des points en fonction du temps écoulé
   const calculatePoints = () => {
-  // Fonction pour attribuer des points en fonction du temps écoulé
-  const calculatePoints = () => {
     const maxPoints = 100;
     const timeLimit = 30;
 
@@ -111,6 +109,7 @@ function ShowQuestion() {
     const userAnswer = e.target.id;
 
     if (cycle !== 8) {
+      // Code commun pour les deux branches de la condition
       if (userAnswer === quizData.quizzes[index].answer) {
         players[index].points += calculatePoints();
         console.log(players[index].points);
@@ -119,16 +118,9 @@ function ShowQuestion() {
         console.log(players[index].points);
       }
 
+      // Code spécifique à chaque branche de la condition
       if (index < players.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
-        setIsClose(true);
-        setResetTimer(true);
-        setShuffledAnswers(
-          randomDataAnswer(
-            quizData.quizzes[index + 1].badAnswers,
-            quizData.quizzes[index + 1].answer
-          )
-        );
       } else {
         navigate("/classement");
       }
@@ -143,18 +135,19 @@ function ShowQuestion() {
 
       if (index < players.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
-        setIsClose(true);
-        setResetTimer(true);
-        setShuffledAnswers(
-          randomDataAnswer(
-            quizData.quizzes[index + 1].badAnswers,
-            quizData.quizzes[index + 1].answer
-          )
-        );
       } else {
         navigate("/resultat");
       }
     }
+
+    setIsClose(true);
+    setResetTimer(true);
+    setShuffledAnswers(
+      randomDataAnswer(
+        quizData.quizzes[index + 1].badAnswers,
+        quizData.quizzes[index + 1].answer
+      )
+    );
   };
 
   // Fonction de rappel pour réinitialiser la minuterie
@@ -220,5 +213,5 @@ function ShowQuestion() {
     </div>
   );
 }
-}
+
 export default ShowQuestion;
