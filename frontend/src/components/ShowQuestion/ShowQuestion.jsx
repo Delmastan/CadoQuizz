@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useOptions } from "../../contexts/PlayerContext";
 import { useNavigate } from "react-router-dom";
-import boule from "../../assets/icons/36.png"
+import boule from "../../assets/icons/36.png";
 
 import "./ShowQuestion.scss";
 
@@ -54,13 +54,14 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
     ).padStart(2, "0")}`;
   };
 
-  return <p>{formatTime(seconds)}</p>;
+  return <p className="ShowQ-time">{formatTime(seconds)}</p>;
 }
 
 // Composant principal ShowQuestion
 function ShowQuestion() {
   const navigate = useNavigate();
-  const { players, category, limit, difficulty, cycle } = useOptions();
+  const { players, category, limit, difficulty, cycle, numberCycle } =
+    useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
   const [index, setIndex] = useState(0);
@@ -108,8 +109,7 @@ function ShowQuestion() {
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
-    if (cycle !== 8) {
-      // Code commun pour les deux branches de la condition
+    if (cycle !== numberCycle) {
       if (userAnswer === quizData.quizzes[index].answer) {
         players[index].points += calculatePoints();
         console.log(players[index].points);
@@ -163,22 +163,22 @@ function ShowQuestion() {
       >
         {isActive && (
           <>
-          <p className="ShowQ-text-user">C'est le tour de
-              <br /></p>
-            <h1 className="ShowQ-title-user">
-              {players[index].name}
-            </h1>
+            <p className="ShowQ-text-user">
+              C'est le tour de
+              <br />
+            </p>
+            <h1 className="ShowQ-title-user">{players[index].name}</h1>
             <div className="ShowQ-Contain-button-answer">
-            <button
-              className="ShoQ-button-answer"
-              type="button"
-              onClick={() => {
-                setIsClose(false);
-                resetTimerCallback();
-              }}
-            >
-              Commencer
-            </button>
+              <button
+                className="ShoQ-button-answer"
+                type="button"
+                onClick={() => {
+                  setIsClose(false);
+                  resetTimerCallback();
+                }}
+              >
+                Commencer
+              </button>
             </div>
           </>
         )}
@@ -195,10 +195,10 @@ function ShowQuestion() {
             onTimeChange={setElapsedTime}
           />
         )}
-        <img src={boule} className="ShowQ-img-timer"/>
+        <img src={boule} className="ShowQ-img-timer" />
         <h3>{quizData && quizData.quizzes[index].question}</h3>
-          {shuffledAnswers.map((answer) => (
-            <div key={answer} className="ShowQ-Contain-button-answer">
+        {shuffledAnswers.map((answer) => (
+          <div key={answer} className="ShowQ-Contain-button-answer">
             <button
               id={answer}
               type="button"
@@ -207,8 +207,8 @@ function ShowQuestion() {
             >
               {answer}
             </button>
-        </div>
-          ))}
+          </div>
+        ))}
       </article>
     </div>
   );
