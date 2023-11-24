@@ -16,7 +16,7 @@
   }
 
   .field-home-page {
-    font-size: 64px;
+    font-size: min(max(36px, 4vw), 64px);
     padding: 8px;
     text-align: center;
     font-weight: bold;
@@ -38,7 +38,7 @@
       margin-bottom: 10px;
       text-align: center;
       font-weight: bold;
-      font-size: 64px;
+      font-size: min(max(36px, 4vw), 64px);
       font-family: "Text-font";
     }
     #input-cycle-home-page {
