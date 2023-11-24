@@ -1,8 +1,7 @@
 .ShoWQ-contain {
-  background: url("../../assets/imagehomepage.png"), lightgray;
+  background-image: url("../../assets/imagehomepage.png");
   background-position: center;
-  background-size: 160% 160%;
-  background-position: -154px -383.936px;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100%;
@@ -83,6 +82,12 @@
       width: 100px;
       height: 100px;
       object-fit: contain;
+    }
+    .ShowQ-time {
+      position: absolute;
+      right: 30px;
+      top: 40px;
+      z-index: 1;
     }
     h3 {
       text-shadow: #ee3448;
