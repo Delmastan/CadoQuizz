@@ -7,8 +7,8 @@ export default function PlayerProvider({ children }) {
   const [players, setPlayers] = useState([]);
   const [category, setCategory] = useState();
   const [limit, setLimit] = useState();
-  const [difficulty, setDifficulty] = useState();
   const [cycle, setCycle] = useState(1);
+  const [numberCycle, setNumberCycle] = useState(1);
 
   const value = useMemo(
     () => ({
@@ -18,12 +18,12 @@ export default function PlayerProvider({ children }) {
       setCategory,
       limit,
       setLimit,
-      difficulty,
-      setDifficulty,
       cycle,
       setCycle,
+      numberCycle,
+      setNumberCycle,
     }),
-    [players, category, limit, difficulty, cycle]
+    [players, category, limit, cycle, numberCycle]
   );
 
   return <ApiContext.Provider value={value}>{children}</ApiContext.Provider>;
