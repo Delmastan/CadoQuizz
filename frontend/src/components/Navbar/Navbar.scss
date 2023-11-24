@@ -6,7 +6,6 @@
   height: 60px;
   .navbar-logo {
     position: absolute;
-
     left: calc(50% - 80px);
     display: flex;
     align-items: center;
@@ -14,6 +13,38 @@
       color: #fff;
       font-size: 2.5rem;
       font-family: Title-font;
+    }
+  }
+}
+.menuburger-contain-modal {
+  position: relative;
+
+  .menuburger-modal {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: calc(100vh - 50px);
+    background: transparent;
+    backdrop-filter: blur(0);
+    opacity: 1;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 3;
+    h3 {
+      color: black;
+    }
+
+    &.open {
+      backdrop-filter: blur(4px);
+      opacity: 1;
+      transform: translate(0);
+    }
+    .menuburger-contain-pages {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      width: 50%;
+      height: 100%;
     }
   }
 }
