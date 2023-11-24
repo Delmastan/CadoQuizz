@@ -32,7 +32,7 @@ function HomePage() {
           name="input"
           value={numberPlayer}
           onChange={(e) => {
-            const value = Math.min(Number(e.target.value), 20);
+            const value = Math.max(0, Math.min(Number(e.target.value), 20));
             setNumberPlayer(value);
           }}
           max={20}
@@ -46,7 +46,7 @@ function HomePage() {
             id="input-cycle-home-page"
             value={numberCycle}
             onChange={(e) => {
-              const value = Math.min(Number(e.target.value), 10);
+              const value = Math.max(0, Math.min(Number(e.target.value), 10));
               setNumberCycle(value);
             }}
             max={10}
