@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./HomePage.scss";
 import { useNavigate } from "react-router-dom";
 import { useOptions } from "../../contexts/PlayerContext";
+import SnowScript from "../SnowScript";
 
 function HomePage() {
   const { numberCycle, setNumberCycle, setLimit } = useOptions();
@@ -15,6 +16,9 @@ function HomePage() {
 
   return (
     <div className="home-page">
+      <div className="snow-script-container">
+        <SnowScript />
+      </div>
       <div className="title-home-page">
         <h1>CADOQUIZ</h1>
       </div>
@@ -35,7 +39,7 @@ function HomePage() {
         />
       </div>
       <div className="difficulty-home-page">
-        <h2>Choisissez le nombre de cycle</h2>
+        <h2>Choisissez le nombre de cycles</h2>
         <div className="cycle-home-page">
           <input
             type="text"
