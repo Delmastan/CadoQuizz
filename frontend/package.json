@@ -11,7 +11,9 @@
     "react-bootstrap": "^2.9.1",
     "react-custom-roulette": "^1.4.1",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.14.2",
+    "react-snowfall": "^1.2.1",
     "sass": "^1.69.5"
   },
   "devDependencies": {

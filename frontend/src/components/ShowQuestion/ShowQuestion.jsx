@@ -60,7 +60,7 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
 // Composant principal ShowQuestion
 function ShowQuestion() {
   const navigate = useNavigate();
-  const { players, category, limit, difficulty } = useOptions();
+  const { players, category, limit, difficulty, cycle } = useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
   const [index, setIndex] = useState(0);
@@ -90,6 +90,8 @@ function ShowQuestion() {
 
   // Fonction pour attribuer des points en fonction du temps écoulé
   const calculatePoints = () => {
+  // Fonction pour attribuer des points en fonction du temps écoulé
+  const calculatePoints = () => {
     const maxPoints = 100;
     const timeLimit = 30;
 
@@ -103,30 +105,55 @@ function ShowQuestion() {
 
     return points;
   };
+
   // Fonction pour gérer le clic sur une réponse
   const handleClick = (e) => {
     const userAnswer = e.target.id;
 
-    if (userAnswer === quizData.quizzes[index].answer) {
-      players[index].points += calculatePoints();
-      console.log(players[index].points);
-      console.info("Bonne réponse");
+    if (cycle !== 8) {
+      if (userAnswer === quizData.quizzes[index].answer) {
+        players[index].points += calculatePoints();
+        console.log(players[index].points);
+        console.info("Bonne réponse");
+      } else {
+        console.log(players[index].points);
+      }
+
+      if (index < players.length - 1) {
+        setIndex((prevIndex) => prevIndex + 1);
+        setIsClose(true);
+        setResetTimer(true);
+        setShuffledAnswers(
+          randomDataAnswer(
+            quizData.quizzes[index + 1].badAnswers,
+            quizData.quizzes[index + 1].answer
+          )
+        );
+      } else {
+        navigate("/classement");
+      }
     } else {
-      console.log(players[index].points);
-    }
-    if (index < players.length - 1) {
-      setIndex((prevIndex) => prevIndex + 1);
-      setIsClose(true);
-      setResetTimer(true);
-      // Mélanger les réponses pour la question suivante
-      setShuffledAnswers(
-        randomDataAnswer(
-          quizData.quizzes[index + 1].badAnswers,
-          quizData.quizzes[index + 1].answer
-        )
-      );
-    } else {
-      navigate("/classement");
+      if (userAnswer === quizData.quizzes[index].answer) {
+        players[index].points += calculatePoints();
+        console.log(players[index].points);
+        console.info("Bonne réponse");
+      } else {
+        console.log(players[index].points);
+      }
+
+      if (index < players.length - 1) {
+        setIndex((prevIndex) => prevIndex + 1);
+        setIsClose(true);
+        setResetTimer(true);
+        setShuffledAnswers(
+          randomDataAnswer(
+            quizData.quizzes[index + 1].badAnswers,
+            quizData.quizzes[index + 1].answer
+          )
+        );
+      } else {
+        navigate("/resultat");
+      }
     }
   };
 
@@ -193,5 +220,5 @@ function ShowQuestion() {
     </div>
   );
 }
-
+}
 export default ShowQuestion;

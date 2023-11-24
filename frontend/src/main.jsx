@@ -9,6 +9,8 @@ import HomePage from "./components/HomePage/HomePage";
 import Roulette from "./components/Roulette/Roulette";
 import ActualRanking from "./pages/ActualRanking";
 import Roue from "./components/Roue/Roue";
+import FinalResults from "./pages/FinalResults";
+import Ruling from "./components/Ruling/Ruling";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,8 @@ const router = createBrowserRouter([
         element: <ShowQuestion />,
       },
       { path: "/classement", element: <ActualRanking /> },
-      { path: "/resultat", element: <>Resultat</> },
+      { path: "/resultat", element: <FinalResults /> },
+      { path: "/regles", element: <Ruling /> },
     ],
   },
 ]);
