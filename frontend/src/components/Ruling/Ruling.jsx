@@ -3,8 +3,11 @@ import "./Ruling.scss";
 function Ruling() {
   return (
     <div className="ruling-container">
+      <div className="ruling-title">
+        <h1>Règles</h1>
+      </div>
       <div className="ruling-inscription">
-        <h2>1. Inscription :</h2>
+        <h2>1. Inscription</h2>
         <p>Chaque participant s'inscrit sur le site en indiquant son nom.</p>
         <p>
           Le nombre de joueurs et le nombre de cycles (tours) sont définis lors
@@ -13,7 +16,7 @@ function Ruling() {
       </div>
 
       <div className="ruling-attribution">
-        <h2>2. Attribution des rôles :</h2>
+        <h2>2. Attribution des rôles</h2>
         <p>Chaque joueur est ajouté à la liste dans l'ordre d'inscription.</p>
         <p>
           Une roue est utilisée pour déterminer la catégorie de questions pour
@@ -22,7 +25,7 @@ function Ruling() {
       </div>
 
       <div className="ruling-cycle">
-        <h2>3. Déroulement d'un cycle :</h2>
+        <h2>3. Déroulement d'un cycle</h2>
         <p>
           Chaque joueur, dans l'ordre établi, répond à une question de la
           catégorie déterminée par la roue.
@@ -42,7 +45,7 @@ function Ruling() {
       </div>
 
       <div className="ruling-categories">
-        <h2>4. Rotation des catégories :</h2>
+        <h2>4. Rotation des catégories</h2>
         <p>
           Après que chaque joueur ait répondu à une question, la roue est
           relancée pour déterminer la nouvelle catégorie de questions pour le
@@ -55,7 +58,7 @@ function Ruling() {
       </div>
 
       <div className="ruling-fin">
-        <h2>5. Fin du cycle :</h2>
+        <h2>5. Fin du cycle</h2>
         <p>
           Une fois que tous les cycles ont été complétés, le classement est
           établi en fonction du nombre total de points accumulés par chaque
@@ -68,7 +71,7 @@ function Ruling() {
       </div>
 
       <div className="ruling-cadeaux">
-        <h2>6. Sélection des cadeaux :</h2>
+        <h2>6. Sélection des cadeaux</h2>
         <p>
           Les cadeaux doivent être apportés par chaque participant avant le
           début du jeu.
