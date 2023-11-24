@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useOptions } from "../../contexts/PlayerContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import boule from "../../assets/icons/36.png"
 
 import "./ShowQuestion.scss";
 
@@ -58,7 +59,7 @@ function Timer({ isClose, resetTimer, reset, onTimeChange }) {
 
 // Composant principal ShowQuestion
 function ShowQuestion() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { players, category, limit, difficulty } = useOptions();
   const [isActive, setIsActive] = useState(true);
   const [isClose, setIsClose] = useState(true);
@@ -75,28 +76,31 @@ function ShowQuestion() {
       setQuizData(result);
       // Mélanger les réponses une seule fois lors de l'initialisation
       setShuffledAnswers(
-        randomDataAnswer(result.quizzes[index].badAnswers, result.quizzes[index].answer)
+        randomDataAnswer(
+          result.quizzes[index].badAnswers,
+          result.quizzes[index].answer
+        )
       );
     };
 
     if (players.length > 0) {
       fetchQuizData();
     }
-}, [players, category, limit, difficulty, index]);
+  }, [players, category, limit, difficulty, index]);
 
-// Fonction pour attribuer des points en fonction du temps écoulé
-const calculatePoints = () => {
+  // Fonction pour attribuer des points en fonction du temps écoulé
+  const calculatePoints = () => {
     const maxPoints = 100;
     const timeLimit = 30;
-    
+
     // elapsedTime représente le temps écoulé depuis le début de la question jusqu'à la réponse du joueur
     // elapsedTime est supposé être un nombre décroissant de 30 à 0
     // (30 secondes au début et 0 secondes lorsque le temps est écoulé)
-    const elapsedTimeRatio =  (elapsedTime / timeLimit);
-  
+    const elapsedTimeRatio = elapsedTime / timeLimit;
+
     // La formule ajustée pour attribuer plus de points pour des réponses plus rapides
     const points = Math.max(0, Math.round(elapsedTimeRatio * maxPoints));
-  
+
     return points;
   };
   // Fonction pour gérer le clic sur une réponse
@@ -104,11 +108,11 @@ const calculatePoints = () => {
     const userAnswer = e.target.id;
 
     if (userAnswer === quizData.quizzes[index].answer) {
-        players[index].points += calculatePoints()
-        console.log(players[index].points);
-        console.info("Bonne réponse");
-    }else{
-        console.log(players[index].points);
+      players[index].points += calculatePoints();
+      console.log(players[index].points);
+      console.info("Bonne réponse");
+    } else {
+      console.log(players[index].points);
     }
     if (index < players.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
@@ -116,19 +120,20 @@ const calculatePoints = () => {
       setResetTimer(true);
       // Mélanger les réponses pour la question suivante
       setShuffledAnswers(
-        randomDataAnswer(quizData.quizzes[index + 1].badAnswers, quizData.quizzes[index + 1].answer)
+        randomDataAnswer(
+          quizData.quizzes[index + 1].badAnswers,
+          quizData.quizzes[index + 1].answer
+        )
       );
-    }else{
-        navigate('/classement');
+    } else {
+      navigate("/classement");
     }
-
   };
 
   // Fonction de rappel pour réinitialiser la minuterie
   const resetTimerCallback = () => {
     setResetTimer(false);
   };
-
 
   return (
     <div className="ShoWQ-contain">
@@ -138,9 +143,14 @@ const calculatePoints = () => {
       >
         {isActive && (
           <>
-            <h1 className="ShowQ-title-user">{players[index].name}</h1>
+          <p className="ShowQ-text-user">C'est le tour de
+              <br /></p>
+            <h1 className="ShowQ-title-user">
+              {players[index].name}
+            </h1>
+            <div className="ShowQ-Contain-button-answer">
             <button
-              className="ShowQ-button-start"
+              className="ShoQ-button-answer"
               type="button"
               onClick={() => {
                 setIsClose(false);
@@ -149,6 +159,7 @@ const calculatePoints = () => {
             >
               Commencer
             </button>
+            </div>
           </>
         )}
       </div>
@@ -164,18 +175,20 @@ const calculatePoints = () => {
             onTimeChange={setElapsedTime}
           />
         )}
-        <h2>{quizData && quizData.quizzes[index].question}</h2>
-        {shuffledAnswers.map((answer) => (
-          <button
-            key={answer}
-            id={answer}
-            type="button"
-            className="ShoQ-button-answer"
-            onClick={(e) => handleClick(e)}
-          >
-            {answer}
-          </button>
-        ))}
+        <img src={boule} className="ShowQ-img-timer"/>
+        <h3>{quizData && quizData.quizzes[index].question}</h3>
+          {shuffledAnswers.map((answer) => (
+            <div key={answer} className="ShowQ-Contain-button-answer">
+            <button
+              id={answer}
+              type="button"
+              className="ShoQ-button-answer"
+              onClick={(e) => handleClick(e)}
+            >
+              {answer}
+            </button>
+        </div>
+          ))}
       </article>
     </div>
   );
