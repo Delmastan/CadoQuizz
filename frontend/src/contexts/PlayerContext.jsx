@@ -5,10 +5,10 @@ const ApiContext = createContext();
 
 export default function PlayerProvider({ children }) {
   const [players, setPlayers] = useState([]);
-  const [category, setCategory] = useState();
-  const [limit, setLimit] = useState();
+  const [category, setCategory] = useState("");
+  const [limit, setLimit] = useState("");
   const [cycle, setCycle] = useState(1);
-  const [numberCycle, setNumberCycle] = useState(1);
+  const [numberCycle, setNumberCycle] = useState("");
 
   const value = useMemo(
     () => ({

@@ -6,7 +6,7 @@ import SnowScript from "../SnowScript";
 
 function HomePage() {
   const { numberCycle, setNumberCycle, setLimit } = useOptions();
-  const [numberPlayer, setNumberPlayer] = useState(1);
+  const [numberPlayer, setNumberPlayer] = useState("");
   const navigate = useNavigate();
 
   const handleValidationClick = () => {
@@ -27,7 +27,7 @@ function HomePage() {
           <p>Choisissez le nombre de participants</p>
         </div>
         <input
-          type="text"
+          type="number"
           id="input-field-home-page"
           name="input"
           value={numberPlayer}
@@ -42,7 +42,7 @@ function HomePage() {
         <h2>Choisissez le nombre de cycles</h2>
         <div className="cycle-home-page">
           <input
-            type="text"
+            type="number"
             id="input-cycle-home-page"
             value={numberCycle}
             onChange={(e) => {
@@ -58,6 +58,7 @@ function HomePage() {
           type="button"
           className="validation-button"
           onClick={handleValidationClick}
+          disabled={!numberCycle}
         >
           Valider
         </button>
